@@ -1,0 +1,26 @@
+// // command to install grpcurl with homebrew
+// brew install grpcurl
+
+// to check the list of service available at your server
+grpcurl --plaintext localhost:9009 list
+
+// to check the endpoint available at this service
+grpcurl --plaintext localhost:9009 list <service>
+grpcurl --plaintext localhost:9009 list todo.TodoService
+
+// to invoke CreateTodo
+grpcurl --plaintext -d '{"description":"grocery", "completion_status": "false"}' localhost:9009 todo.TodoService/CreateTodo
+grpcurl --plaintext -d '{"description":"gym", "completion_status": "false"}' localhost:9009 todo.TodoService/CreateTodo
+grpcurl --plaintext -d '{"description":"office work", "completion_status": "false"}' localhost:9009 todo.TodoService/CreateTodo
+
+// to invoke GetTodos
+grpcurl --plaintext localhost:9009 todo.TodoService/GetTodos
+
+// to invoke GetTodoById
+grpcurl --plaintext -d '{"id":1}' localhost:9009 todo.TodoService/GetTodoById
+
+// update todo
+grpcurl --plaintext -d '{"id":2,"description":"gymming", "completion_status": "true"}' localhost:9009 todo.TodoService/UpdateTodo
+
+// delete todo
+grpcurl --plaintext -d '{"id":3}' localhost:9009 todo.TodoService/DeleteTodo

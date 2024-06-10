@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package todo;
+
+// Todo message type
+message Todo {
+    int32 id=1;
+    string description=2;
+    string completion_status=3;
+}
+
+
+// defining the services
+service TodoService {
+
+    // GET /todos (retrieve all todos)
+    // GET /todos/{id} (retrieve a single todo)
+    // POST /todos (create a todo)
+    // PATCH /todos/{id} (update a todo)
+    // DELETE /todos/{id} (delete a todo)
+
+    rpc GetTodos (GetTodosRequest) returns (GetTodosResponse) {}
+    rpc GetTodoById (GetTodoByIdRequest) returns (Todo) {}
+    rpc CreateTodo (CreateTodoRequest) returns (Todo) {}
+    rpc UpdateTodo (UpdateTodoRequest) returns (Todo) {}
+    rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse) {}
+
+}
+
+
+// defining request & response structure
+message GetTodosRequest {}
+
+message GetTodosResponse {
+    repeated Todo todos = 1;
+}
+
+message GetTodoByIdRequest {
+    int32 id = 1;
+}
+
+message CreateTodoRequest {
+    string description = 1;
+    string completion_status = 2;
+}
+
+message UpdateTodoRequest {
+    int32 id=1;
+    string description = 2;
+    string completion_status = 3;
+}
+
+message DeleteTodoRequest {
+    int32 id = 1;
+}
+
+message DeleteTodoResponse {
+    string success = 1;
+}
